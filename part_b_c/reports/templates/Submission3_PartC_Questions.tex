@@ -1,0 +1,54 @@
+\hypersetup{pdftitle={Submission 3: Part C Questions},pdfauthor={}}
+\begin{document}
+\docheader{Submission 3: Part C, Questions on the Real-Dataset Experiment}
+I compared TF-IDF, BM25 and a Dirichlet Language Model in Apache Lucene on the Cranfield collection ([[D['docs']]] documents, [[D['queries']]] queries). Methods and code are in Submission 4.
+\begin{table}[H]\small\centering\caption{Main results (mean over [[D['queries']]] queries, default parameters).}
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Model & MAP & MRR & P@3 & P@10 & nDCG@10 & Recall (full list) \\\midrule
+TF-IDF & [[c('TF-IDF','AP')]] & [[c('TF-IDF','RR')]] & [[c('TF-IDF','P3')]] & [[c('TF-IDF','P10')]] & [[c('TF-IDF','nDCG10')]] & [[c('TF-IDF','R')]] \\
+BM25 & [[c('BM25','AP')]] & [[c('BM25','RR')]] & [[c('BM25','P3')]] & [[c('BM25','P10')]] & [[c('BM25','nDCG10')]] & [[c('BM25','R')]] \\
+LM-Dirichlet ($\mu$=2000) & [[c('LM-Dirichlet','AP')]] & [[c('LM-Dirichlet','RR')]] & [[c('LM-Dirichlet','P3')]] & [[c('LM-Dirichlet','P10')]] & [[c('LM-Dirichlet','nDCG10')]] & [[c('LM-Dirichlet','R')]] \\
+\bottomrule\end{tabular}\end{table}
+
+\section{Did the evaluation code that worked on the controlled dataset also work on the real dataset? What changes were necessary?}
+Yes. The metric functions in \texttt{ir\_metrics.py} ran with no changes, and the ranx library gave the same values to six decimals. The changes were all in the code around those functions.
+\begin{table}[H]\small\centering
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{1.6in}X@{}}\toprule
+Change & Why \\\midrule
+Loaders for qrels and run files & Part B data was typed into Python, and Part C uses TREC-format files. \\
+Renumbering query IDs & Query numbers in the file run 1, 2, 4, 8 and so on up to [[D['raw_max_query_num']]], but the qrels number queries 1 to 225 by position. Without the fix, BM25's MAP falls from [[c('BM25','AP')]] to [[f"{C['wrong_ids']['AP']:.4f}"]] and no error is raised. This was the change that mattered most. \\
+Rank cutoffs & Precision on lists of up to 1000 is close to meaningless (BM25: [[c('BM25','P')]]), so I added Precision, Recall and F1 at rank 10. \\
+nDCG for all queries, with binary gain & Part B had grades for Q1 only, and the copy of the qrels I could get is binary. \\
+\bottomrule\end{tabularx}\end{table}
+
+\section{Did the real-world results match your expectations?}
+Partly. I expected BM25 to clearly beat TF-IDF and the Language Model to come close to BM25. Neither happened.
+
+BM25 and TF-IDF were closer than I expected. BM25's MAP is higher by only [[f"{test('BM25','TF-IDF','AP')['diff']:.4f}"]], which is not significant (randomization $p$ = [[p(test('BM25','TF-IDF','AP')['p_perm'])]]). TF-IDF even has the higher MRR, and it has the single best AP on more queries ([[C['best_AP']['TF-IDF']]] against [[C['best_AP']['BM25']]]). Lucene's TF-IDF includes length normalization, which may remove much of the gap a basic TF-IDF would show, though I did not test that.
+
+The Language Model did worse than I expected. Its MAP is [[f"{test('BM25','LM-Dirichlet','AP')['diff']:.4f}"]] below BM25's ($p$ [[p(test('BM25','LM-Dirichlet','AP')['p_perm'])]]). The default $\mu$=2000 is about 20 times the mean document length of [[f"{float(IDX['meanLen']):.0f}"]] terms. A smaller $\mu$ helped (MAP [[c('LMD-mu50','AP')]] at $\mu$=50), but it still stayed below BM25.
+
+The absolute scores did look reasonable for a small, hard collection. Queries average only [[f"{D['relevant_per_query_mean']:.1f}"]] relevant documents, so P@10 cannot be high on many of them.
+
+\section{Which metrics were most informative for your experiment, and why?}
+\begin{table}[H]\small\centering
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Metric & What it told me \\\midrule
+MAP & The most informative. It uses the position of every relevant document and clearly separated the Language Model. \\
+nDCG@10 & Same conclusion as MAP, focused on the first page. It told me less than usual because the gains were binary. \\
+MRR & A different view: TF-IDF and BM25 swap places on it, although that difference is not significant. \\
+P@10, Recall@10 & Easy to read, but limited by how many relevant documents a query has (from [[D['relevant_per_query_min']]] to [[D['relevant_per_query_max']]]). \\
+Full-list P, R, F1 & The least informative. They are almost identical across models (Recall [[c('TF-IDF','R',3)]] to [[c('BM25','R',3)]]) because each list holds nearly every document that matches any query term. \\
+\bottomrule\end{tabularx}\end{table}
+The paired significance tests were as useful as the metrics. Without them I could have read the small BM25 and TF-IDF gap as a real difference.
+
+\section{What are the main limitations of your evaluation?}
+\begin{enumerate}
+\item The collection is old and narrow. It has 1960s aeronautics abstracts and long questions (about [[f"{D['mean_query_words']:.0f}"]] words), which do not represent modern web or enterprise search.
+\item Relevance is binary in the copy I used, so nDCG did not measure graded relevance. Rows labeled ``no interest'' in the original were treated as non-relevant.
+\item Unjudged documents count as non-relevant, which can understate any model.
+\item The main comparison uses default parameters. I picked the sensitivity settings after seeing test queries and had no separate tuning set, so those scores are not clean estimates.
+\item Results depend on Lucene's implementations and on \texttt{EnglishAnalyzer}, whose small stop list keeps words such as ``what''.
+\item These offline metrics say nothing about speed, satisfaction or real click behavior.
+\end{enumerate}
+\end{document}

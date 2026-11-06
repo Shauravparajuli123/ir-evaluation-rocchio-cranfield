@@ -1,0 +1,127 @@
+\hypersetup{pdftitle={Submission 4: Part C Report},pdfauthor={}}
+\begin{document}
+\docheader{Submission 4: Part C, Experiment on a Real Online IR Dataset}
+\section{Summary}
+I ran TF-IDF, BM25 and a Dirichlet Language Model on the Cranfield test collection using Apache Lucene. With default parameters, BM25 (MAP [[c('BM25','AP')]]) and TF-IDF (MAP [[c('TF-IDF','AP')]]) were statistically indistinguishable, and both were significantly better than the Language Model (MAP [[c('LM-Dirichlet','AP')]]). Every value in this report comes from an actual run.
+
+\section{Dataset description and source}
+\begin{table}[H]\small\centering\caption{Cranfield collection.}
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Documents & [[D['docs']]] aeronautical engineering abstracts; [[IDX['tokens']]] tokens after analysis, [[IDX['vocab']]] unique terms, mean [[f"{float(IDX['meanLen']):.1f}"]] terms per document \\
+Queries & [[D['queries']]] natural-language questions, mean [[f"{D['mean_query_words']:.1f}"]] words \\
+Qrels & [[D['qrel_rows']]] rows, [[D['positive_rows']]] of them positive; mean [[f"{D['relevant_per_query_mean']:.2f}"]] relevant documents per query, from [[D['relevant_per_query_min']]] to [[D['relevant_per_query_max']]] \\
+Why chosen & It is public, has the components the assignment requires, and is a historic benchmark [5]. TREC document sets usually require a license [6]. \\
+Source used & TREC-format copy, commit 1208e6e: \url{https://github.com/oussbenk/cranfield-trec-dataset} \\
+Original & \url{http://ir.dcs.gla.ac.uk/resources/test_collections/cran/} \\
+\bottomrule\end{tabularx}\end{table}
+I could not reach the original site from my working environment, so I used the TREC-format copy and checked it against the \texttt{ir\_datasets} metadata for Cranfield [7]. The document, query and qrel counts match (1400, 225, 1837), and the [[D['qrel_label_counts']['0']]] rows labeled 0 match the metadata's 225 ``no interest'' ($-1$) rows. The metadata lists grades 1 to 4 for the other rows, and this copy has flattened them to 1, apart from one row labeled 3 that I treated as relevant. Documents [[D['empty_text_docs'][0]]] and [[D['empty_text_docs'][1]]] have no abstract, so I indexed their titles.
+
+\section{Experimental setup and methodology}
+\begin{table}[H]\small\centering\caption{Setup, the same for all models.}
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Engine & Apache Lucene [[IDX['lucene']]], Java 21 (jar from Anserini 2.3.0 [8], distributed with Pyserini 2.4.0) \\
+Analysis & \texttt{EnglishAnalyzer} on documents and queries (default stop words, Porter stemmer) \\
+Indexed text & Abstract field, which already begins with the title in the source \\
+Query & Topic text analyzed, then all terms combined with OR (\texttt{BooleanQuery}, SHOULD) \\
+Depth & Top 1000; a mean of [[f"{C['retrieved_mean']['BM25']:.0f}"]] documents returned, since only documents with a query term match \\
+Saved results & TREC-format run files (\texttt{results/partc\_*.run}) \\
+Evaluation & Part B functions; set metrics on the full list and at rank 10; AP over the list; nDCG with binary gain \\
+Testing & Paired two-sided randomization test (100,000 sign flips, seed 618) and Wilcoxon signed-rank test [9] \\
+\bottomrule\end{tabularx}\end{table}
+\begin{table}[H]\small\centering\caption{Models. $f$ is a query term's frequency in document $d$ and $|d|$ the document length.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}lYl@{}}\toprule
+Model & Scoring idea & Parameters \\\midrule
+TF-IDF (\texttt{ClassicSimilarity}) & $\sqrt{f}\cdot \mathrm{idf}^2\cdot |d|^{-1/2}$, summed over query terms & defaults \\
+BM25 (\texttt{BM25Similarity}) [10] & idf times a saturating function of $f$, normalized by $|d|$ relative to the mean & $k_1$=1.2, $b$=0.75 \\
+LM-Dirichlet (\texttt{LMDirichletSimilarity}) [11] & Term probability in $d$, smoothed with the collection model & $\mu$=2000 \\
+\bottomrule\end{tabularx}\end{table}
+
+\section{Results}
+\begin{table}[H]\small\centering\caption{Mean metrics over [[D['queries']]] queries. The best value in each row is in bold; ties are not marked.}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Metric & TF-IDF & BM25 & LM-Dirichlet \\\midrule
+[[t_c()]]
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]\small\centering\caption{Paired tests over 225 queries. W/L/T counts queries where the first model scored higher, lower or equal.}
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Comparison & Metric & Mean diff. & W/L/T & Randomization $p$ & Wilcoxon $p$ \\\midrule
+[[t_tests()]]
+\bottomrule\end{tabular}\end{table}
+With a Bonferroni threshold of $0.05/12=0.0042$, all eight comparisons involving the Language Model stay significant and none of the BM25 vs TF-IDF comparisons is.
+
+\begin{table}[H]\small\centering\caption{Query-level behavior. All three models tied for best AP on [[C['best_AP']['tie']]] queries.}
+\begin{tabular}{@{}lrrr@{}}\toprule
+ & TF-IDF & BM25 & LM-Dirichlet \\\midrule
+Queries where the model alone has the best AP & [[C['best_AP']['TF-IDF']]] & [[C['best_AP']['BM25']]] & [[C['best_AP']['LM-Dirichlet']]] \\
+Queries with no relevant document in the top 10 & [[C['zero_P10']['TF-IDF']]] & [[C['zero_P10']['BM25']]] & [[C['zero_P10']['LM-Dirichlet']]] \\
+\bottomrule\end{tabular}\end{table}
+Mean top-10 overlap was [[f"{C['overlap10']['BM25|TF-IDF']:.3f}"]] for BM25 and TF-IDF, [[f"{C['overlap10']['BM25|LM-Dirichlet']:.3f}"]] for BM25 and the Language Model, and [[f"{C['overlap10']['TF-IDF|LM-Dirichlet']:.3f}"]] for TF-IDF and the Language Model.
+
+\begin{table}[H]\small\centering\caption{Five queries with the largest AP spread across models.}
+\begin{tabularx}{\linewidth}{@{}rYrrrr@{}}\toprule
+ID & Query & Rel. & TF-IDF & BM25 & LM \\\midrule
+[[t_ex()]]
+\bottomrule\end{tabularx}\end{table}
+
+\begin{table}[H]\small\centering\caption{Parameter sensitivity. These settings were picked after viewing test queries, with no separate tuning set, so treat them as exploratory.}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Configuration & MAP & MRR & nDCG@10 \\\midrule
+[[t_sens()]]
+\bottomrule\end{tabular}\end{table}
+
+\section{Why performance differs}
+BM25 and TF-IDF behave alike here. Their top-10 lists overlap by about three quarters, and both use IDF and length normalization. My guess is that Cranfield's short abstracts give BM25's term-frequency saturation few chances to matter, but I did not test this directly.
+
+The Language Model is the outlier. MAP improves steadily as $\mu$ falls from 2000 to 50 ([[c('LM-Dirichlet','AP')]] to [[c('LMD-mu50','AP')]]), which fits over-smoothing, since $\mu$=2000 is about 20 times the mean document length. Tuning does not close the gap to BM25, and Jelinek-Mercer smoothing tops out at a similar value ([[c('LMJM-l0.7','AP')]]). Lucene's documentation says this class returns 0 where the formula would give a negative score, and only documents containing a query term are scored. Those choices may also limit it, but I did not isolate their effect.
+
+The means hide differences between queries. On query 81, BM25's AP ([[f"{EX['81']['BM25']:.3f}"]]) is double TF-IDF's ([[f"{EX['81']['TF-IDF']:.3f}"]]), and on query 52 TF-IDF leads BM25 by [[f"{EX['52']['TF-IDF']-EX['52']['BM25']:.2f}"]].
+
+\section{Verification}
+My metrics matched the independent \texttt{ranx} library [12] to six decimal places on all eight metrics I compared (three are shown below). A hand check agrees too: for query 81 under BM25, relevant documents 799 and 672 are at ranks 1 and 3, so AP $=(1/1+2/3)/2=0.8333$ and RR $=1$, the same as the program.
+\begin{table}[H]\small\centering\caption{My implementation vs ranx.}
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Model & MAP (mine) & MAP (ranx) & MRR (mine) & MRR (ranx) & nDCG@10 (mine) & nDCG@10 (ranx) \\\midrule
+[[t_ranx()]]
+\bottomrule\end{tabular}\end{table}
+
+\section{Limitations}
+\begin{itemize}
+\item The collection is small, old and domain-specific, so these rankings need not hold for other search tasks.
+\item The qrels copy is binary, so nDCG here does not measure graded relevance. That would need the original graded file.
+\item Unjudged documents count as non-relevant.
+\item The main comparison uses default parameters, and the sensitivity table had no separate tuning set.
+\item Lucene's versions differ from textbook forms, and the analyzer leaves question words such as ``what'' in queries.
+\item There was no user study, and I did not compare speed or index size.
+\end{itemize}
+
+\section*{References}
+{\small
+[1] C. D. Manning, P. Raghavan, and H. Sch\"utze, \emph{Introduction to Information Retrieval}, Cambridge Univ. Press, 2008, Ch. 8.\par
+[2] Apache Lucene, \url{https://lucene.apache.org/}.\par
+[3] Cranfield, TREC-format copy, \url{https://github.com/oussbenk/cranfield-trec-dataset}.\par
+[4] Cranfield, original files, \url{http://ir.dcs.gla.ac.uk/resources/test_collections/cran/}.\par
+[5] C. Cleverdon, ``The Cranfield tests on index language devices,'' \emph{Aslib Proc.}, 19(6), 1967.\par
+[6] NIST TREC FAQ, \url{https://trec.nist.gov/faq.html}.\par
+[7] S. MacAvaney et al., ``Simplified data wrangling with ir\_datasets,'' SIGIR 2021.\par
+[8] J. Lin et al., ``Pyserini: A Python toolkit for reproducible information retrieval research with sparse and dense representations,'' SIGIR 2021.\par
+[9] M. Smucker, J. Allan, and B. Carterette, ``A comparison of statistical significance tests for information retrieval evaluation,'' CIKM 2007.\par
+[10] S. Robertson and H. Zaragoza, ``The probabilistic relevance framework: BM25 and beyond,'' \emph{Found. Trends Inf. Retr.}, 3(4), 2009.\par
+[11] C. Zhai and J. Lafferty, ``A study of smoothing methods for language models applied to information retrieval,'' \emph{ACM TOIS}, 22(2), 2004.\par
+[12] E. Bassani, ``ranx: A blazing-fast Python library for ranking evaluation and comparison,'' ECIR 2022.\par
+}
+
+\clearpage\appendix\section*{Appendix A: Code}
+The folder \texttt{part\_b\_c} in \url{https://github.com/Atmosu/csc618-ir-evaluation-rocchio-cranfield} holds this code, the main run files and the result tables.
+
+\texttt{prepare\_cranfield.py}
+\lstinputlisting[language=Python]{../code/prepare_cranfield.py}
+\texttt{LuceneExperiment.java}
+\lstinputlisting[language=Java]{../code/LuceneExperiment.java}
+\texttt{ir\_metrics.py}
+\lstinputlisting[language=Python]{../code/ir_metrics.py}
+\texttt{part\_c\_eval.py}
+\lstinputlisting[language=Python]{../code/part_c_eval.py}
+\texttt{verify.py}
+\lstinputlisting[language=Python]{../code/verify.py}
+\end{document}

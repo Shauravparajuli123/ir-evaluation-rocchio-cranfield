@@ -1,0 +1,69 @@
+\hypersetup{pdftitle={Submission 2: Part B Controlled Experiment},pdfauthor={}}
+\begin{document}
+\docheader{Submission 2: Part B, Controlled Experiment on IR Evaluation}
+\section{Results}
+All scores below are output from \texttt{part\_b.py} (Appendix A). Precision, Recall and F1 are computed on the five documents each system returned.
+\begin{table}[H]\small\centering\caption{Per-query scores.}
+\begin{tabular}{@{}llrrrrrr@{}}\toprule
+System & Query & Precision & Recall & F1 & P@3 & AP & RR \\\midrule
+[[t_b()]]
+\bottomrule\end{tabular}\end{table}
+\begin{table}[H]\small\centering\caption{Aggregate results over the three queries, plus nDCG@5 for Q1.}
+\begin{tabular}{@{}lrrrrrrr@{}}\toprule
+System & MAP & MRR & Mean P & Mean R & Mean F1 & Mean P@3 & nDCG@5 (Q1) \\\midrule
+A & [[ba('A','MAP')]] & [[ba('A','MRR')]] & [[ba('A','mean_P')]] & [[ba('A','mean_R')]] & [[ba('A','mean_F1')]] & [[ba('A','mean_P3')]] & [[ba('A','nDCG5_Q1')]] \\
+B & [[ba('B','MAP')]] & [[ba('B','MRR')]] & [[ba('B','mean_P')]] & [[ba('B','mean_R')]] & [[ba('B','mean_F1')]] & [[ba('B','mean_P3')]] & [[ba('B','nDCG5_Q1')]] \\
+\bottomrule\end{tabular}\end{table}
+System A scores at least as high as System B on every metric and every query. The two systems differ mostly in ordering. On Q2 and Q3 they retrieve the same number of relevant documents, so Precision, Recall and F1 tie, and the difference shows up in AP and RR (and in P@3 for Q3). Q1 is the only query where B retrieves less, because it misses D5. A ranks a relevant document first every time, and B never does.
+
+\begin{table}[H]\small\centering\caption{Recommendation by search requirement.}
+\begin{tabularx}{\linewidth}{@{}lYl@{}}\toprule
+Requirement & Evidence & Better \\\midrule
+Retrieve more relevant documents & Mean Recall [[ba('A','mean_R')]] vs [[ba('B','mean_R')]]; the gap comes from Q1 alone & A \\
+Place relevant documents near the top & MAP [[ba('A','MAP')]] vs [[ba('B','MAP')]]; MRR [[ba('A','MRR')]] vs [[ba('B','MRR')]] & A \\
+Handle degrees of relevance & nDCG@5 for Q1 [[ba('A','nDCG5_Q1')]] vs [[ba('B','nDCG5_Q1')]] (one query only) & A \\
+\bottomrule\end{tabularx}\end{table}
+
+\section{Manual verification}
+I worked these out by hand and compared them with the program. All match to four decimals.
+\begin{table}[H]\small\centering\caption{Hand calculations.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}lYl@{}}\toprule
+Item & Hand calculation & Program \\\midrule
+AP, System B, Q3 & Relevant at ranks 2, 4, 5: $(1/2+2/4+3/5)/3=1.6/3$ & [[f"{B['rows'][5]['AP']:.4f}"]] \\
+MAP, System B & $(0.3333+0.5889+0.5333)/3\approx 1.4556/3$ & [[ba('B','MAP')]] \\
+F1, System B, Q1 & $P=2/5$, $R=2/3$: $2(0.4)(0.6667)/(0.4+0.6667)$ & [[f"{B['rows'][3]['F1']:.4f}"]] \\
+nDCG@5, System B, Q1 & Gains 0, 3, 0, 2, 0: DCG $=3/\log_2 3+2/\log_2 5\approx 1.8928+0.8614$, which is 2.7541 before rounding. IDCG $=3+2/\log_2 3+1/\log_2 4=4.7619$. Ratio $=2.7541/4.7619$ & [[ba('B','nDCG5_Q1')]] \\
+\bottomrule\end{tabularx}\end{table}
+
+\section{Analysis questions}
+\q{(a) Which system has higher MAP? What does this indicate about its ranking quality?}
+System A, [[ba('A','MAP')]] vs [[ba('B','MAP')]]. A places relevant documents earlier in the list. The MAP gap ([[f"{B['agg']['A']['MAP']-B['agg']['B']['MAP']:.4f}"]]) is much larger than the mean Recall gap ([[f"{B['agg']['A']['mean_R']-B['agg']['B']['mean_R']:.4f}"]]), so most of A's lead comes from better ordering, with only a small part from finding more documents.
+
+\q{(b) Which system has higher MRR? What does that tell you about the position of the first relevant result?}
+System A, [[ba('A','MRR')]] vs [[ba('B','MRR')]]. A's first result is relevant for all three queries. B's first relevant result is at rank 2 every time, so a B user always sees one non-relevant document first.
+
+\q{(c) Do Precision and Recall always lead to the same conclusion about system performance? Explain.}
+No, although they agree in this experiment. They cannot disagree here, because every list has 5 documents and every query has 3 relevant ones, which makes Recall exactly $(5/3)\times$ Precision. They can split when list length varies. A system returning two documents, both relevant, has $P=1.00$ and $R=0.67$. One returning five documents with all three relevant among them has $P=0.60$ and $R=1.00$. Which is better depends on whether the task punishes wrong results or missed ones more.
+
+\q{(d) Why might a system with a high P@3 have a lower MAP than another system?}
+P@3 looks only at the top three positions and ignores their order, while MAP uses every relevant document. My results do not show the reversal, since A is never below B, but Q2 comes close: both have P@3 = 0.6667, and AP is 0.8056 for A and 0.5889 for B. A hypothetical query with six relevant documents shows the full effect. System X finds three of them at ranks 1 to 3 and no others (P@3 = [[f"{HYP['x_p3']:.3f}"]], AP = [[f"{HYP['x_ap']:.3f}"]]). System Y finds all six at ranks 1, 3, 4, 6, 7 and 8 (P@3 = [[f"{HYP['y_p3']:.3f}"]], AP = [[f"{HYP['y_ap']:.3f}"]]).
+
+\q{(e) Which system has the higher nDCG@5 for Q1? Explain how graded relevance affects the result.}
+System A, [[ba('A','nDCG5_Q1')]] vs [[ba('B','nDCG5_Q1')]]. A puts the grade 3 document (D1) first, while B discounts it by placing it second and leaves out the grade 1 document (D5). Grades do not change the winner, but they do change the size of the gap. With binary gains the scores would be [[f"{B['agg']['A']['nDCG5_Q1_binary']:.4f}"]] and [[f"{B['agg']['B']['nDCG5_Q1_binary']:.4f}"]], a gap of [[f"{B['agg']['A']['nDCG5_Q1_binary']-B['agg']['B']['nDCG5_Q1_binary']:.4f}"]]. With grades the gap is [[f"{B['agg']['A']['nDCG5_Q1']-B['agg']['B']['nDCG5_Q1']:.4f}"]]. It narrows because B does retrieve the two most useful documents and misses only the marginal one, which graded relevance penalizes lightly.
+
+\q{(f) Why must both systems use the same queries and relevance judgments for a fair comparison?}
+So that the system is the only thing that varies. Different queries could simply be easier or harder, and different judgments would change what counts as correct. In either case a score difference could not be credited to the systems.
+
+\q{(g) What are the limitations of evaluating only three queries and eight documents?}
+One query can move a mean by a lot, and a significance test cannot show much: with three queries, even with A ahead on all of them, the smallest possible two-sided sign-flip $p$-value is $2/8=0.25$. Each system also returns 5 of the 8 documents, so a random list of five would already have an expected Recall of 0.625. Lists this short cannot show how a system behaves deep in a ranking.
+
+\q{(h) Why can these results not be treated as evidence of the performance of a real university search engine?}
+The rankings are hypothetical and did not come from a running engine, and the assignment states the judgments are for teaching and did not come from a user study. The documents and queries are about IR and machine learning, with nothing on courses, admissions or campus services. A real engine also has to deal with scale, fresh content, duplicates, misspellings and varied user intent. Speed and user satisfaction were not measured at all.
+
+\clearpage\appendix\section*{Appendix A: Code}
+\texttt{ir\_metrics.py}
+\lstinputlisting[language=Python]{../code/ir_metrics.py}
+\texttt{part\_b.py}
+\lstinputlisting[language=Python]{../code/part_b.py}
+\end{document}

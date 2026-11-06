@@ -1,0 +1,160 @@
+\hypersetup{pdftitle={Relevance Feedback Using the Rocchio Algorithm on Cranfield},pdfauthor={}}
+\begin{document}
+\begin{tcolorbox}[enhanced,colback=navy,colframe=navy,coltext=white,arc=6pt,boxrule=0pt,left=14pt,right=14pt,top=12pt,bottom=12pt]
+{\small Utica University \textbar{} CSC 618: Information Retrieval \textbar{} Fall 2026}\\[6pt]
+{\LARGE\bfseries Relevance Feedback Using the Rocchio Algorithm}\\[4pt]
+{\large Experiments on the Cranfield collection}\\[8pt]
+{\small November 2026}\\[2pt]
+{\small Source code: \href{https://github.com/Atmosu/csc618-ir-evaluation-rocchio-cranfield}{\textcolor{white}{\underline{github.com/Atmosu/csc618-ir-evaluation-rocchio-cranfield}}}}
+\end{tcolorbox}
+
+\section{Summary}
+\begin{tcbraster}[raster columns=4,raster equal height,raster column skip=6pt]
+\stat{MAP, unseen docs}{[[r('before','AP')]] $\to$ [[r('after','AP')]]}{teal}
+\stat{MRR, unseen docs}{[[r('before','RR')]] $\to$ [[r('after','RR')]]}{navy}
+\stat{P@10, unseen docs}{[[r('before','P10')]] $\to$ [[r('after','P10')]]}{teal}
+\stat{Queries up / down}{[[T('AP')['up']]] / [[T('AP')['down']]]}{amber}
+\end{tcbraster}
+\vspace{4pt}
+
+I added Rocchio relevance feedback to my Part C search system on the Cranfield collection (Apache Lucene, TF-IDF). With feedback from the top 10 results, MAP on documents the user had not yet seen rose from [[r('before','AP')]] to [[r('after','AP')]]. AP went up on [[T('AP')['up']]] of [[R['residual']['n']]] queries and down on [[T('AP')['down']]]. Rocchio helped most when the top 10 held at least one relevant document, and using negative feedback alone made results worse. The feedback choices came from the answer key, so these results show what happens with a user who never makes a mistake.
+
+\section{Implementation}
+The documents, queries, text cleaning (\texttt{EnglishAnalyzer}) and TF-IDF scoring are the same as in my Cranfield Part C: [[D['docs']]] documents and [[D['queries']]] queries. With feedback switched off, the new code gives MAP [[f"{R['baseline_vs_partc']['map_baseline']:.4f}"]], the same as Part C, and the same top 10 for all [[R['baseline_vs_partc']['total']]] queries. Query numbers are matched to the judgments by position, as in Part C.
+
+Rocchio moves the query toward relevant documents and away from non-relevant ones:
+\[ \vec{q}_{new} = \alpha\,\vec{q}_{0} + \frac{\beta}{|D_r|}\sum_{\vec{d}\in D_r}\vec{d} \;-\; \frac{\gamma}{|D_{nr}|}\sum_{\vec{d}\in D_{nr}}\vec{d} \]
+Here $\vec{q}_0$ is the original query, $D_r$ the relevant documents and $D_{nr}$ the non-relevant documents chosen by the user.
+
+\begin{table}[H]\small\centering\caption{How each step works in the code.}
+\rowcolors{2}{white}{zebra}\begin{tabularx}{\linewidth}{lY}\rowcolor{navy}\textcolor{white}{\textbf{Step}} & \textcolor{white}{\textbf{What the code does}} \\
+Document vector & Each word gets Lucene's TF-IDF weight: $\sqrt{tf}\cdot idf\cdot 1/\sqrt{\text{length}}$. The vector is then scaled to length 1. \\
+Query vector & Word count times $idf$, scaled to length 1. \\
+Update & Applies the formula above, then removes any word whose weight is zero or negative. \\
+Search & Sends each word to Lucene with boost = weight / $idf$. Lucene's score then equals query weight times document weight, summed over words. \\
+User selection & \texttt{RocchioDemo.java} shows the top 10 and asks the user to type the ranks of relevant and non-relevant documents. \\
+Batch runs & \texttt{RocchioExperiment.java} repeats the steps for all [[D['queries']]] queries, using the answer key in place of the user. \\
+Scoring & \texttt{rocchio\_eval.py} uses my Part B metric functions, unchanged. \\
+\hline\end{tabularx}\end{table}
+
+\section{Experiment method}
+For each query I recorded the original ranking, marked the top 10 results as relevant or non-relevant using the answer key, ran the updated query, and recorded the new ranking. The default settings were $\alpha$ = 1, $\beta$ = 0.75 and $\gamma$ = 0.15, the values suggested by Manning et al. [1]. My copy of the Cranfield judgments is yes or no, so nDCG uses gain 1 for relevant documents.
+
+\begin{note}I scored the rankings in two ways. ``All documents'' is the plain before-and-after comparison, but it flatters Rocchio because the user has already told the system which top documents are relevant, and those documents naturally rise. ``Unseen documents'' removes the 10 judged documents from both rankings and from the answer key [1], so it measures only new documents found for the user. I treat this as the fair result. It covers [[R['residual']['n']]] queries, because the other [[D['queries']-R['residual']['n']]] have no relevant document left after the top 10 is removed.\end{note}
+
+\section{Results}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{before_after.pdf}\caption{Average scores on unseen documents before and after feedback.}\end{figure}
+\begin{table}[H]\small\centering\caption{Average scores before and after feedback ($\alpha$ = 1, $\beta$ = 0.75, $\gamma$ = 0.15).}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrrrrrr}\rowcolor{navy} & \multicolumn{3}{c}{\cellcolor{navy}\textcolor{white}{\textbf{All documents ([[R['full']['n']]] queries)}}} & \multicolumn{3}{c}{\cellcolor{navy}\textcolor{white}{\textbf{Unseen documents ([[R['residual']['n']]] queries)}}} \\
+\rowcolor{navy}\textcolor{white}{\textbf{Metric}} & \textcolor{white}{\textbf{Before}} & \textcolor{white}{\textbf{After}} & \textcolor{white}{\textbf{Change}} & \textcolor{white}{\textbf{Before}} & \textcolor{white}{\textbf{After}} & \textcolor{white}{\textbf{Change}} \\
+[[t_ba()]]
+\hline\end{tabular}\end{table}
+Precision and F1 over the whole list barely move, because each list holds up to 1000 documents and Rocchio mostly changes their order. The metrics that look at the top of the list show the gain.
+
+\begin{table}[H]\small\centering\caption{Change on unseen documents, query by query. A small $p$ means the change is unlikely to be chance (sign-flip test with 100,000 repeats).}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrrrrr}\rowcolor{navy}\textcolor{white}{\textbf{Metric}} & \textcolor{white}{\textbf{Mean change}} & \textcolor{white}{\textbf{Queries up}} & \textcolor{white}{\textbf{Queries down}} & \textcolor{white}{\textbf{No change}} & \textcolor{white}{\textbf{$p$}} \\
+[[t_tests()]]
+\hline\end{tabular}\end{table}
+
+\begin{table}[H]\small\centering\caption{MAP on unseen documents, grouped by how many relevant documents the original top 10 held.}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrrrrr}\rowcolor{navy}\textcolor{white}{\textbf{Relevant in top 10}} & \textcolor{white}{\textbf{Queries}} & \textcolor{white}{\textbf{Before}} & \textcolor{white}{\textbf{After}} & \textcolor{white}{\textbf{Change}} & \textcolor{white}{\textbf{Queries down}} \\
+[[t_group()]]
+\hline\end{tabular}\end{table}
+On average, the query grew from [[f"{R['query_terms']['orig']:.0f}"]] to [[f"{R['query_terms']['new']:.0f}"]] words, and no word was removed at these settings. The new top 10 shared [[f"{R['rank_change']['top10_overlap']*100:.0f}"]]\% of its documents with the old one, so about [[f"{R['rank_change']['new_in_top10']:.1f}"]] documents per query were new.
+
+\section{Demonstration}
+This is real output from \texttt{RocchioDemo} for query 20. I typed ranks 2 to 6 as relevant and the other five as non-relevant, following the answer key. In class the user can choose any documents. Captured runs for queries 144 and 168 are in the repository.
+\lstinputlisting[style=term]{demo_query20_trim.txt}
+
+\section{Effect of alpha, beta and gamma}
+I ran 115 settings. These tables show MAP on unseen documents. For comparison, MAP with no feedback is [[f"{BASE:.4f}"]]. I chose the settings to try and read the results on the same queries, so the best values here are a guide only.
+\begin{table}[H]\small\centering\caption{Changing $\beta$ and $\gamma$ with $\alpha$ = 1. The number in brackets is how many of the [[R['residual']['n']]] queries got a lower AP.}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrrrrr}\rowcolor{navy} & \textcolor{white}{\textbf{$\gamma$ = 0}} & \textcolor{white}{\textbf{$\gamma$ = 0.15}} & \textcolor{white}{\textbf{$\gamma$ = 0.25}} & \textcolor{white}{\textbf{$\gamma$ = 0.5}} & \textcolor{white}{\textbf{$\gamma$ = 1}} \\
+[[t_grid()]]
+\hline\end{tabular}\end{table}
+\begin{table}[H]\small\centering\caption{Changing $\alpha$ with $\beta$ = 0.75 and $\gamma$ = 0.15.}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrrrr}\rowcolor{navy}\textcolor{white}{\textbf{$\alpha$}} & \textcolor{white}{\textbf{MAP (unseen)}} & \textcolor{white}{\textbf{MAP (all)}} & \textcolor{white}{\textbf{Queries up}} & \textcolor{white}{\textbf{Queries down}} \\
+[[t_alpha()]]
+\hline\end{tabular}\end{table}
+\begin{table}[H]\small\centering\caption{Changing how many top results are judged. Judging more documents removes more of them from the unseen list and changes the queries that can be scored, so compare the change.}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrrrr}\rowcolor{navy}\textcolor{white}{\textbf{Documents judged}} & \textcolor{white}{\textbf{Queries scored}} & \textcolor{white}{\textbf{Before (unseen)}} & \textcolor{white}{\textbf{After (unseen)}} & \textcolor{white}{\textbf{Change}} \\
+[[t_k()]]
+\hline\end{tabular}\end{table}
+
+\section{Comparison with my CISI run}
+\begin{table}[H]\small\centering\caption{The same Rocchio code on both collections, at the default settings.}
+\rowcolors{2}{white}{zebra}\begin{tabular}{lrr}\rowcolor{navy} & \textcolor{white}{\textbf{Cranfield}} & \textcolor{white}{\textbf{CISI}} \\
+Documents & [[D['docs']]] & 1460 \\
+Average words in the original query & [[f"{R['query_terms']['orig']:.1f}"]] & [[f"{CISI['terms']:.1f}"]] \\
+Queries scored on unseen documents & [[R['residual']['n']]] & [[CISI['n']]] \\
+MAP on unseen documents, before & [[r('before','AP')]] & [[f"{CISI['before']:.4f}"]] \\
+MAP on unseen documents, after & [[r('after','AP')]] & [[f"{CISI['after']:.4f}"]] \\
+Queries up / down & [[T('AP')['up']]] / [[T('AP')['down']]] & [[CISI['up']]] / [[CISI['down']]] \\
+\hline\end{tabular}\end{table}
+Rocchio improved both collections, with a larger gain on Cranfield. Cranfield queries are much shorter, so my guess is that the added words give them more new information. I did not test this directly. The two also differ on $\gamma$: raising it from 0 to 0.5 helped on CISI and hurt on Cranfield when $\alpha$ = 1 and $\beta$ = 0.75, so a value that works on one collection may not work on another.
+
+\section{Analysis questions}
+\q{1. How does Rocchio modify the original query?}
+It adds the average of the relevant document vectors and subtracts the average of the non-relevant ones. Words in relevant documents get higher weights, and words from those documents that were not in the query are added. Words common in non-relevant documents get lower weights, and they are removed if the weight falls to zero or below. For query 20, the query grew from 16 to 182 words. ``convect'' rose from 0.2743 to 0.4390, ``joul'' fell from 0.4690 to 0.4555, and ``formal'' stayed the same because no feedback document contains it.
+
+\q{2. How does relevance feedback affect document ranking?}
+Documents that share words with the relevant examples move up, even if they share few words with the original query. On query 20, relevant documents the user had not seen moved up: doc 269 from rank 12 to 7, doc 408 from rank 15 to 8, doc 267 from rank 19 to 9 and doc 104 from rank 93 to 11. Across all queries, about [[f"{R['rank_change']['new_in_top10']:.1f}"]] of the top 10 documents were new.
+
+\q{3. Does Rocchio improve retrieval effectiveness?}
+Yes on average, with correct feedback. The gain was small when the top 10 held no relevant document, since the query then gets only negative feedback, and [[R['by_rel']['0']['down']]] of those [[R['by_rel']['0']['n']]] queries got worse.
+
+\q{4. Support your answer with evaluation metrics.}
+On unseen documents, MAP rose from [[r('before','AP')]] to [[r('after','AP')]], MRR from [[r('before','RR')]] to [[r('after','RR')]], P@10 from [[r('before','P10')]] to [[r('after','P10')]], and nDCG@10 from [[r('before','nDCG10')]] to [[r('after','nDCG10')]]. All of these changes are unlikely to be chance ($p$ below 0.00001). On all documents, MAP rose from [[a('before','AP')]] to [[a('after','AP')]], but part of that comes from the judged documents moving up.
+
+\q{5. What happens when the values of alpha, beta, and gamma are changed?}
+Only the ratio between the three values matters. For example, ($\alpha$, $\beta$, $\gamma$) = (0.5, 0.75, 0.5) and (1, 1.5, 1) gave the same MAP of [[f"{G(1,1.5,1)['residual']['AP']:.4f}"]].
+
+$\alpha$ controls how much of the original query is kept. With $\beta$ and $\gamma$ fixed, MAP was [[f"{G(2,.75,.15)['residual']['AP']:.4f}"]] at $\alpha$ = 2 and [[f"{G(.5,.75,.15)['residual']['AP']:.4f}"]] at $\alpha$ = 0.5, because a large $\alpha$ limits what feedback can change. With $\alpha$ = 0 the original query is dropped, and the number of queries that got worse rose from [[G(1,.75,.15)['down']]] to [[G(0,.75,.15)['down']]].
+
+$\beta$ had the largest effect. With $\alpha$ = 1 and $\gamma$ = 0.15, MAP rose from [[f"{G(1,0,.15)['residual']['AP']:.4f}"]] at $\beta$ = 0 to [[f"{G(1,1.5,.15)['residual']['AP']:.4f}"]] at $\beta$ = 1.5.
+
+$\gamma$ had a smaller effect, and more of it did harm. With $\beta$ = 0.75, MAP fell from [[f"{G(1,.75,0)['residual']['AP']:.4f}"]] at $\gamma$ = 0 to [[f"{G(1,.75,1)['residual']['AP']:.4f}"]] at $\gamma$ = 1, and the number of queries that got worse rose from [[G(1,.75,0)['down']]] to [[G(1,.75,1)['down']]]. No original query word was removed even at $\gamma$ = 1. Using only negative feedback was the worst choice. All 12 settings below the no-feedback score had $\beta$ = 0.
+
+The highest MAP I saw was [[f"{BEST['residual']['AP']:.4f}"]] at ($\alpha$, $\beta$, $\gamma$) = ([[BEST['alpha']]], [[BEST['beta']]], [[BEST['gamma']]]), although [[BEST['down']]] queries got worse there.
+
+\q{6. Are there cases where relevance feedback reduces retrieval effectiveness? Explain why.}
+Yes. AP on unseen documents fell for [[T('AP')['down']]] of the [[R['residual']['n']]] queries at the default settings. These are the five largest drops.
+\begin{table}[H]\small\centering\caption{Largest drops in AP on unseen documents.}
+\rowcolors{2}{white}{zebra}\begin{tabularx}{\linewidth}{rrrrY}\rowcolor{navy}\textcolor{white}{\textbf{Query}} & \textcolor{white}{\textbf{Relevant in top 10}} & \textcolor{white}{\textbf{Before}} & \textcolor{white}{\textbf{After}} & \textcolor{white}{\textbf{Heaviest added words (stemmed)}} \\
+[[t_down()]]
+\hline\end{tabularx}\end{table}
+Query 168 fell the most. Its one judged relevant document is about flow in a converging-diverging nozzle, so Rocchio added ``diverg'', ``pattern'' and ``converg''. The other relevant document, on flow through nozzles near critical speed, fell from rank 11 to rank 15. Once the top 10 is removed, this took it from first place to seventh among unseen documents, and AP fell from 1.0 to 0.1429. A single unseen document makes this score swing widely.
+
+On query 144, the judged relevant documents are mostly about bending and buckling of cylinders, while the query asks about membrane cylinders. The added words included ``buckl'' and ``compress'', and the unseen document ``analysis of partly wrinkled membrane'' fell from rank 11 to rank 28. I think this is query drift: the feedback pulled the query toward one part of its topic. Queries with no relevant document in the top 10 are also at risk, because they have only negative feedback and no good words to add.
+
+\section{Limitations}
+\begin{itemize}
+\item The answer key played the user, so these results assume perfect choices from the top 10. Real users make mistakes and may mark only a few documents.
+\item Cranfield is small, old and about one subject, and the copy I used has yes-or-no judgments, so nDCG here does not use grades.
+\item Some queries have very few relevant documents left after the top 10 is removed, so one document can change a query's score a lot.
+\item I tested Rocchio with TF-IDF scoring only.
+\item The settings were compared on the same queries used to report results, with no separate test set.
+\item I checked the scores against the ranx library [4], which matched to six decimals. I did not measure speed.
+\end{itemize}
+
+\section*{References}
+{\small
+[1] C. D. Manning, P. Raghavan, and H. Sch\"utze, \emph{Introduction to Information Retrieval}, Cambridge Univ. Press, 2008, Ch. 9. \url{https://nlp.stanford.edu/IR-book/html/htmledition/relevance-feedback-and-query-expansion-1.html}\par
+[2] J. J. Rocchio, ``Relevance feedback in information retrieval,'' in \emph{The SMART Retrieval System}, G. Salton, Ed., Prentice-Hall, 1971.\par
+[3] Apache Lucene, \url{https://lucene.apache.org/}.\par
+[4] E. Bassani, ``ranx: A blazing-fast Python library for ranking evaluation and comparison,'' ECIR 2022.\par
+[5] Cranfield collection, copy used: \url{https://github.com/oussbenk/cranfield-trec-dataset}. Original: \url{http://ir.dcs.gla.ac.uk/resources/test_collections/cran/}.\par
+}
+
+\clearpage\appendix\section*{Appendix A: Code}
+\texttt{RocchioCore.java}
+\lstinputlisting[language=Java]{../src/RocchioCore.java}
+\texttt{RocchioDemo.java}
+\lstinputlisting[language=Java]{../src/RocchioDemo.java}
+\texttt{RocchioExperiment.java}
+\lstinputlisting[language=Java]{../src/RocchioExperiment.java}
+\texttt{rocchio\_eval.py}
+\lstinputlisting[language=Python]{../src/rocchio_eval.py}
+\texttt{ir\_metrics.py} (unchanged from Part B)
+\lstinputlisting[language=Python]{../src/ir_metrics.py}
+\end{document}

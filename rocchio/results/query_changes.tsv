@@ -1,0 +1,226 @@
+qid	rel_in_top10	non_in_top10	orig_terms	new_terms	added	removed	top_added
+1	5	5	13	218	205	0	structur:0.096 load:0.072 research:0.061 respect:0.049 angular:0.049 thermo:0.048 wing:0.045 transon:0.044
+2	3	7	9	166	157	0	angular:0.082 heat:0.075 subject:0.061 thermal:0.059 load:0.059 respect:0.058 extern:0.055 aerodynam:0.054
+3	6	4	11	195	184	0	expos:0.087 resist:0.061 transient:0.050 thermal:0.050 input:0.049 period:0.046 time:0.045 layer:0.045
+4	1	9	18	86	68	0	sound:0.187 frozen:0.141 amongst:0.137 dispers:0.130 concis:0.130 reservoir:0.114 absorpt:0.114 reaction:0.113
+5	2	8	8	206	198	0	reaction:0.136 dissoci:0.086 rate:0.086 equilibrium:0.086 concentr:0.086 shock:0.084 regim:0.082 phenomena:0.081
+6	1	9	11	89	78	0	poiseuil:0.180 laufer:0.134 rest:0.133 plate:0.129 fluctuat:0.126 mean:0.125 turbulen:0.119 veloc:0.113
+7	2	8	13	120	107	0	fine:0.175 similar:0.120 rotat:0.103 cylind:0.097 law:0.092 chart:0.092 rapid:0.090 ratio:0.086
+8	1	9	12	94	82	0	cone:0.154 element:0.145 conic:0.137 abbrevi:0.132 lockhe:0.132 inconsist:0.125 nonaxisymmetr:0.116 quit:0.116
+9	3	7	7	117	110	0	jump:0.113 studies.dash:0.084 continuum:0.083 laminar:0.071 path:0.070 plate:0.069 impuls:0.067 refer:0.066
+10	2	8	11	75	64	0	carbon:0.141 thermodynam:0.139 monoxid:0.124 steam:0.118 dioxid:0.109 tabl:0.108 thermal:0.099 hydrogen:0.098
+11	2	8	11	116	105	0	sedov:0.108 explos:0.091 1:0.088 japan:0.084 imai:0.084 1953:0.084 662:0.084 propag:0.081
+12	1	9	10	45	35	0	hovercraft:0.213 peripher:0.204 cushion:0.199 econom:0.198 jet:0.145 optimum:0.141 weight:0.136 examin:0.120
+13	0	10	6	6	0	0	
+14	2	8	5	81	76	0	refract:0.182 vortic:0.154 weak:0.141 plane:0.127 attenu:0.091 arbitrari:0.087 incid:0.085 stationari:0.084
+15	2	8	3	101	98	0	paraplex:0.136 optic:0.135 fring:0.127 photo:0.123 thermoelast:0.123 photothermoelast:0.117 thermal:0.109 modulu:0.100
+16	2	8	11	132	121	0	azimuth:0.111 entir:0.103 meridian:0.100 set:0.094 right:0.094 elementari:0.091 round:0.085 neumann:0.083
+17	1	9	12	37	25	0	azimuth:0.221 meridian:0.200 right:0.187 elementari:0.177 perpendicular:0.170 round:0.170 past:0.163 entir:0.137
+18	1	9	8	90	82	0	39:0.162 x:0.149 9:0.143 sting:0.143 transon:0.131 increment:0.122 1.09:0.121 10:0.120
+19	1	9	15	57	42	0	oscillatori:0.239 vehicl:0.182 trajectori:0.177 defici:0.149 human:0.149 man:0.143 seriou:0.140 motion:0.138
+20	5	5	16	182	166	0	magnet:0.144 field:0.104 liquid:0.102 electr:0.090 parallel:0.089 transvers:0.081 plate:0.075 vertic:0.075
+21	0	10	11	11	0	0	
+22	0	10	11	11	0	0	
+23	3	7	8	202	194	0	lift:0.086 wing:0.079 shed:0.072 dure:0.069 aspect:0.068 hysteresi:0.061 lead:0.060 time:0.059
+24	2	8	10	123	113	0	invers:0.142 matrix:0.093 member:0.088 hopeless:0.084 journal:0.083 shed:0.081 intim:0.078 purpos:0.077
+25	5	5	13	278	265	0	turbin:0.117 compressor:0.091 stage:0.084 perform:0.068 test:0.065 oper:0.059 loss:0.056 ratio:0.054
+26	2	8	13	118	105	0	crocco:0.124 utilis:0.094 o:0.084 mark:0.075 0.725:0.075 movement:0.073 transfer:0.070 veloc:0.070
+27	1	9	9	35	26	0	prescrib:0.282 quasi:0.238 ly:0.217 linearis:0.183 cylindr:0.168 load:0.161 surfac:0.158 term:0.147
+28	0	10	8	8	0	0	
+29	4	6	13	114	101	0	programm:0.094 rhombic:0.083 pattern:0.079 distribut:0.079 pressur:0.077 some:0.070 been:0.064 overal:0.063
+30	0	10	6	6	0	0	
+31	0	10	19	19	0	0	
+32	2	8	8	98	90	0	rhombic:0.160 linearis:0.142 section:0.130 deuc:0.117 programm:0.101 delta:0.095 calcul:0.094 written:0.087
+33	3	7	17	179	162	0	lift:0.074 speed:0.071 sting:0.070 drag:0.069 perfor:0.069 m:0.065 effect:0.060 bang:0.059
+34	2	8	9	163	154	0	sting:0.106 until:0.100 model:0.096 lift:0.074 0.84:0.073 1.48:0.073 increas:0.069 open:0.067
+35	0	10	8	8	0	0	
+36	0	10	9	9	0	0	
+37	1	9	6	42	36	0	sonic:0.204 stagnant:0.199 isoenerget:0.199 bleed:0.180 wake:0.167 jet:0.165 extern:0.153 slipstream:0.152
+38	0	10	8	8	0	0	
+39	3	7	8	271	263	0	recombin:0.068 stagnat:0.062 oscil:0.058 discov:0.057 nonequilibrium:0.057 catalyt:0.054 hemispher:0.049 equilibrium:0.046
+40	2	8	8	267	259	0	cool:0.088 about:0.080 enthalpi:0.078 hemispher:0.075 400:0.071 cylind:0.068 ellips:0.068 bodi:0.066
+41	3	7	10	212	202	0	vortic:0.132 roll:0.120 tail:0.102 downwash:0.097 sheet:0.092 trail:0.092 bank:0.090 up:0.084
+42	3	7	12	148	136	0	oswatitsch:0.119 correct:0.106 linearis:0.091 nonlinear:0.078 propos:0.071 bodi:0.067 keun:0.066 slender:0.061
+43	5	5	12	199	187	0	oswatitsch:0.071 wave:0.067 experi:0.064 correct:0.061 scheme:0.060 applic:0.059 sonic:0.058 improv:0.057
+44	0	10	8	8	0	0	
+45	1	9	9	59	50	0	strong:0.152 inviscid:0.149 region:0.148 futur:0.134 match:0.134 divid:0.126 perturb:0.119 plate:0.117
+46	6	4	9	290	281	0	inject:0.096 helium:0.056 gase:0.051 laminar:0.049 layer:0.048 boundari:0.045 porou:0.043 concentr:0.043
+47	5	5	10	224	214	0	region:0.079 layer:0.073 strong:0.069 prandtl:0.069 lead:0.062 inviscid:0.061 edg:0.061 boundari:0.060
+48	3	7	7	198	191	0	chang:0.090 airfoil:0.084 compil:0.075 pattern:0.074 affect:0.073 separ:0.071 flow:0.068 factor:0.064
+49	1	9	16	23	7	0	comment:0.287 drawn:0.272 attent:0.231 improv:0.217 previou:0.214 accur:0.192 solut:0.147
+50	1	9	12	32	20	0	slip:0.290 forst:0.290 curvatur:0.163 compress:0.160 examin:0.157 transvers:0.154 order:0.152 interact:0.140
+51	5	5	15	209	194	0	similar:0.065 deduc:0.064 case:0.058 forst:0.058 cylind:0.055 slip:0.050 laminar:0.047 coordin:0.045
+52	4	6	11	127	116	0	forst:0.072 laminar:0.072 plate:0.072 order:0.072 flat:0.069 interact:0.068 transfer:0.067 first:0.064
+53	2	8	17	74	57	0	electr:0.167 viscou:0.151 conduct:0.129 analyz:0.122 wedg:0.121 incompress:0.097 hall:0.093 govern:0.085
+54	1	9	10	84	74	0	coolant:0.144 1,600:0.144 efficaci:0.144 6.0:0.136 centerlin:0.136 psia:0.130 plug:0.128 600:0.126
+55	3	7	12	121	109	0	transform:0.161 stewartson:0.126 retard:0.081 equat:0.077 rott:0.076 crabtre:0.076 illingworth:0.074 show:0.072
+56	2	8	15	247	232	0	mode:0.086 piston:0.080 wing:0.072 finit:0.070 unswept:0.070 airfoil:0.064 1.75:0.063 section:0.057
+57	1	9	10	59	49	0	theodorsen:0.207 torsion:0.175 c.g:0.161 diagon:0.161 garrick:0.161 bend:0.148 quasi:0.147 k:0.147
+58	1	9	18	52	34	0	ovalu:0.195 bourn:0.184 davi:0.184 downstream:0.180 seban:0.171 kelli:0.171 link:0.171 bond:0.162
+59	1	9	11	76	65	0	hasimoto:0.157 perimet:0.134 seban:0.132 kelli:0.132 everywher:0.131 bond:0.125 eccentr:0.122 drag:0.119
+60	3	7	14	141	127	0	comment:0.096 drawn:0.091 erfc:0.087 accur:0.078 attent:0.077 solut:0.073 improv:0.070 previou:0.069
+61	2	8	11	130	119	0	coeffici:0.116 60:0.110 recoveri:0.108 front:0.102 percent:0.091 0:0.083 reynold:0.082 averag:0.080
+62	0	10	17	17	0	0	
+63	0	10	9	9	0	0	
+64	1	9	15	72	57	0	piston:0.241 panel:0.183 advoc:0.153 stimul:0.147 ackeret:0.142 galerkin:0.129 aeroelast:0.113 rayleigh:0.112
+65	5	5	10	85	75	0	incompress:0.129 vortic:0.115 uniform:0.093 equat:0.086 solut:0.081 steadi:0.070 suction:0.055 infinit:0.052
+66	2	8	14	84	70	0	vortic:0.179 plate:0.112 layer:0.109 flat:0.108 boundari:0.103 princip:0.088 uniform:0.084 outsid:0.082
+67	7	3	10	162	152	0	vortic:0.132 incompress:0.101 uniform:0.064 steadi:0.063 solut:0.059 past:0.057 equat:0.056 situat:0.047
+68	0	10	12	12	0	0	
+69	0	10	9	9	0	0	
+70	1	9	6	104	98	0	twice:0.140 stewartson:0.136 gradient:0.134 favor:0.133 system:0.130 uniqu:0.126 absolut:0.125 viscid:0.115
+71	0	10	5	5	0	0	
+72	1	9	15	80	65	0	w:0.152 0.71:0.149 al:0.141 et:0.141 pr:0.141 eckert:0.135 0.65:0.131 1.25:0.131
+73	7	3	20	412	392	0	nonequilibrium:0.047 frozen:0.044 similar:0.044 inviscid:0.044 nose:0.044 dissoci:0.040 field:0.038 viscou:0.038
+74	0	10	15	15	0	0	
+75	1	9	19	43	24	0	kemp:0.239 surprisingli:0.217 perfectli:0.199 deduc:0.164 shear:0.163 perturb:0.159 slope:0.145 axisymmetr:0.133
+76	2	8	17	146	129	0	region:0.097 hugoniot:0.089 rankin:0.086 transfer:0.085 heat:0.078 regim:0.074 analyt:0.074 import:0.070
+77	3	7	13	259	246	0	stagnat:0.085 hugoniot:0.081 modifi:0.078 ting:0.067 where:0.067 free:0.065 zakkai:0.064 region:0.064
+78	3	7	9	184	175	0	stall:0.140 perform:0.124 match:0.114 multistag:0.092 characterist:0.083 analysi:0.066 stack:0.060 oper:0.059
+79	1	9	13	48	35	0	1.75:0.241 scruton:0.180 2.47:0.180 woodgat:0.180 al:0.170 et:0.170 aerofoil:0.159 0.02:0.155
+80	0	10	13	13	0	0	
+81	2	8	10	137	127	0	blockag:0.189 interfer:0.156 open:0.144 octagon:0.114 wake:0.097 constraint:0.087 wall:0.083 influenc:0.082
+82	3	7	15	169	154	0	endplat:0.097 straight:0.090 chordwis:0.089 load:0.082 subcrit:0.069 aerofoil:0.068 classic:0.066 ani:0.065
+83	1	9	7	63	56	0	triangular:0.181 nonlift:0.151 uniqu:0.143 wing:0.132 alwai:0.127 introduct:0.126 part:0.123 specifi:0.123
+84	4	6	14	270	256	0	transit:0.095 convect:0.061 portion:0.054 flare:0.052 cone:0.050 stagnat:0.049 good:0.049 nomograph:0.047
+85	1	9	14	97	83	0	rough:0.321 smallest:0.160 height:0.143 critic:0.120 sandpap:0.120 type:0.114 reynold:0.106 correl:0.104
+86	2	8	15	103	88	0	instrument:0.099 roll:0.092 brief:0.084 yaw:0.082 principl:0.082 basic:0.079 suitabl:0.077 test:0.076
+87	0	10	15	15	0	0	
+88	6	4	15	225	210	0	perige:0.128 eccentr:0.091 oblat:0.083 period:0.080 densiti:0.066 e:0.061 0.2:0.060 distanc:0.059
+89	1	9	13	72	59	0	deg:0.171 pattern:0.144 828:0.140 333:0.140 53:0.140 incid:0.139 smoothli:0.134 aft:0.119
+90	4	6	7	162	155	0	interact:0.113 wave:0.082 rise:0.081 turbul:0.073 ahead:0.066 upstream:0.059 overexpand:0.057 nozzl:0.054
+91	3	7	6	198	192	0	blockag:0.173 open:0.126 tunnel:0.110 aerofoil:0.083 octagon:0.076 wall:0.075 correct:0.070 differ:0.069
+92	6	4	18	275	257	0	altitud:0.079 flight:0.076 shock:0.073 nois:0.065 ground:0.058 wave:0.057 measur:0.056 bomber:0.055
+93	1	9	15	58	43	0	hydrocarbon:0.240 fuel:0.189 ethylen:0.178 burn:0.163 compound:0.138 200degre:0.138 transport:0.131 mixtur:0.128
+94	5	5	9	263	254	0	forward:0.076 local:0.072 laminar:0.063 dissoci:0.055 fai:0.054 riddel:0.054 up:0.048 present:0.045
+95	2	8	7	195	188	0	local:0.104 rate:0.099 dissoci:0.089 1.97:0.077 bodi:0.074 0.012:0.069 stagnat:0.067 axisymmetr:0.066
+96	5	5	9	268	259	0	gust:0.116 aspect:0.090 oscil:0.075 calcul:0.075 sinusoid:0.070 ratio:0.066 sudden:0.062 function:0.060
+97	2	8	10	158	148	0	sinusoid:0.172 wing:0.113 lift:0.107 delta:0.093 unsteadi:0.088 sink:0.087 total:0.074 calcul:0.074
+98	0	10	15	15	0	0	
+99	2	8	13	194	181	0	pitch:0.082 flutter:0.077 freedom:0.077 would:0.077 librat:0.069 commenc:0.069 massachusett:0.069 were:0.069
+100	2	8	11	158	147	0	lee:0.090 cylind:0.087 precipit:0.079 strength:0.071 group:0.065 plastic:0.063 uneven:0.061 turbanc:0.061
+101	5	5	15	254	239	0	law:0.076 load:0.053 materi:0.047 quantit:0.047 path:0.045 infinit:0.042 account:0.038 prager:0.037
+102	2	8	8	58	50	0	network:0.162 natur:0.160 frequenc:0.157 vibrat:0.155 beam:0.122 panel:0.112 stringer:0.093 flexur:0.091
+103	0	10	5	5	0	0	
+104	0	10	13	13	0	0	
+105	3	7	9	128	119	0	frequenc:0.157 cylind:0.095 mode:0.083 thin:0.075 pressuris:0.073 system:0.072 natur:0.066 lineal:0.065
+106	2	8	4	123	119	0	nodal:0.146 timoshenko:0.146 frequenc:0.144 cylind:0.110 mode:0.107 lineal:0.098 pattern:0.090 circular:0.084
+107	3	7	14	145	131	0	excit:0.123 review:0.104 fatigu:0.104 jet:0.102 stress:0.081 panel:0.079 sandwich:0.075 confid:0.072
+108	5	5	7	243	236	0	failur:0.106 random:0.103 panel:0.102 stress:0.073 discret:0.065 life:0.055 time:0.053 some:0.053
+109	0	10	4	4	0	0	
+110	1	9	11	37	26	0	pattern:0.215 rigor:0.207 elast:0.187 exhibit:0.186 structur:0.179 phenomenon:0.169 how:0.169 analyz:0.145
+111	4	6	11	210	199	0	restrain:0.081 statu:0.072 against:0.065 rotat:0.057 circular:0.050 midplan:0.050 flat:0.050 unstiffen:0.048
+112	1	9	15	101	86	0	converg:0.137 domain:0.137 shall:0.132 chain:0.118 we:0.113 intermedi:0.112 guarante:0.112 inspect:0.107
+113	1	9	11	67	56	0	0.7:0.189 0.2:0.187 0.04:0.187 0:0.167 0.02:0.164 tab:0.164 frequenc:0.146 0.5:0.143
+114	1	9	18	82	64	0	ko:0.206 aspect:0.150 complement:0.132 low:0.131 unsteadi:0.120 iii:0.119 o:0.117 frequenc:0.111
+115	1	9	11	65	54	0	angular:0.247 aircraft:0.220 structur:0.167 extern:0.158 act:0.133 withstand:0.133 abil:0.128 acceler:0.128
+116	1	9	10	77	67	0	flare:0.225 6.8:0.201 rose:0.142 incid:0.136 kopal:0.135 notic:0.122 m.i.t:0.121 level:0.119
+117	0	10	13	13	0	0	
+118	2	8	8	125	117	0	triangular:0.148 trapezoid:0.132 wing:0.123 rm:0.114 tail:0.103 estim:0.102 method:0.084 predict:0.082
+119	1	9	17	73	56	0	postbuckl:0.184 cylinder:0.163 shell:0.143 post:0.140 less:0.117 critic:0.115 aid:0.111 behaviour:0.106
+120	6	4	15	165	150	0	stress:0.103 clamp:0.094 stiffen:0.078 cylind:0.072 axial:0.072 temperatur:0.063 ring:0.062 frame:0.056
+121	5	5	10	147	137	0	stress:0.124 shell:0.105 axial:0.102 cylind:0.080 clamp:0.076 cylindr:0.071 temperatur:0.069 restraint:0.055
+122	1	9	14	41	27	0	prikl:0.191 vlasov:0.191 placement:0.191 1944:0.191 meh:0.191 mat:0.180 rewrit:0.180 109:0.180
+123	0	10	12	12	0	0	
+124	0	10	27	27	0	0	
+125	2	8	7	100	93	0	upon:0.129 base:0.105 0.1875:0.101 again:0.080 pressur:0.079 free:0.078 bluff:0.078 ratio:0.078
+126	2	8	7	122	115	0	side:0.177 nozzl:0.133 rocket:0.114 secondari:0.114 forc:0.109 liquid:0.095 injector:0.090 wall:0.079
+127	1	9	11	61	50	0	chart:0.205 yeh:0.192 kay:0.192 dealt:0.157 enabl:0.136 rapid:0.120 depend:0.119 togeth:0.115
+128	0	10	9	9	0	0	
+129	4	6	13	213	200	0	blade:0.170 impel:0.118 splitter:0.077 hub:0.070 through:0.064 rear:0.060 vane:0.059 inlet:0.055
+130	4	6	14	203	189	0	bai:0.107 width:0.080 thermal:0.064 3.0:0.062 dynam:0.061 fair:0.059 length:0.059 alloi:0.058
+131	3	7	14	174	160	0	imperfect:0.101 load:0.091 capac:0.088 buckl:0.079 recogn:0.078 marin:0.073 effici:0.070 failur:0.062
+132	6	4	4	179	175	0	column:0.168 critic:0.093 time:0.080 plastic:0.068 imperfect:0.067 instantan:0.065 strain:0.058 initi:0.058
+133	1	9	4	64	60	0	gage:0.192 111:0.159 600:0.140 column:0.133 strain:0.131 semiempir:0.120 bend:0.119 guid:0.113
+134	1	9	12	84	72	0	transient:0.184 metal:0.158 elev:0.148 famili:0.129 curv:0.126 iron:0.126 nondimension:0.122 phase:0.122
+135	4	6	6	109	103	0	time:0.110 instantan:0.098 deform:0.086 load:0.083 fail:0.081 plastic:0.075 critic:0.075 collaps:0.072
+136	1	9	9	38	29	0	collaps:0.241 500:0.186 300:0.176 aluminum:0.160 alloi:0.157 fair:0.157 f:0.144 theoret:0.137
+137	2	8	29	124	95	0	500:0.093 extern:0.091 300:0.088 column:0.084 fair:0.078 aluminum:0.076 versu:0.075 alloi:0.075
+138	1	9	11	81	70	0	intern:0.195 lowest:0.192 p:0.163 node:0.149 mode:0.145 spectra:0.141 n:0.108 rapidli:0.105
+139	0	10	14	14	0	0	
+140	2	8	6	117	111	0	chang:0.130 thick:0.123 right:0.108 shallow:0.106 cylind:0.104 sphere:0.100 thin:0.096 portion:0.092
+141	1	9	9	84	75	0	multi:0.171 languag:0.140 meridion:0.122 matric:0.121 rotation:0.121 discret:0.118 slow:0.114 arbitrarili:0.114
+142	0	10	12	12	0	0	
+143	2	8	8	122	114	0	rotation:0.123 mth:0.116 thin:0.099 thick:0.099 shallow:0.098 symmetr:0.093 multi:0.085 elast:0.083
+144	4	6	18	132	114	0	buckl:0.076 compress:0.075 strength:0.073 unpressur:0.070 data:0.069 test:0.065 previous:0.062 present:0.058
+145	4	6	13	123	110	0	intern:0.123 membran:0.080 buckl:0.073 strength:0.073 unpressur:0.064 test:0.063 compress:0.063 previous:0.059
+146	2	8	11	52	41	0	wrinkl:0.182 load:0.133 previous:0.125 strength:0.119 term:0.092 present:0.090 data:0.082 stretch:0.082
+147	3	7	11	120	109	0	plate:0.087 sheet:0.071 fasten:0.071 curv:0.067 elast:0.067 solut:0.063 buckl:0.059 isotrop:0.058
+148	2	8	7	48	41	0	orthotrop:0.184 curv:0.158 construct:0.149 plate:0.145 account:0.126 shear:0.118 due:0.102 primarili:0.096
+149	3	7	11	113	102	0	fourth:0.087 shallow:0.085 spring:0.075 disk:0.066 equat:0.066 relat:0.066 almen:0.064 laszlo:0.064
+150	2	8	11	111	100	0	sweepback:0.111 combin:0.110 non:0.099 4:0.087 m:0.085 theori:0.084 found:0.081 experi:0.078
+151	0	10	9	9	0	0	
+152	1	9	11	53	42	0	6.86:0.216 insul:0.162 profil:0.160 simplifi:0.132 upon:0.128 displac:0.124 laminar:0.124 dimension:0.121
+153	3	7	7	153	146	0	steadi:0.108 mesh:0.103 numer:0.100 reynold:0.094 size:0.094 viscou:0.075 solut:0.074 converg:0.073
+154	2	8	11	131	120	0	relax:0.128 partial:0.112 comput:0.095 seidel:0.091 gauss:0.087 success:0.082 wb:0.078 practition:0.077
+155	2	8	6	82	76	0	shield:0.133 telemet:0.109 sensor:0.104 stagnat:0.097 mechan:0.088 polym:0.081 2,400degre:0.081 3,800degre:0.081
+156	6	4	7	255	248	0	heat:0.084 teflon:0.079 stagnat:0.078 enthalpi:0.069 test:0.054 btu:0.054 lb:0.053 potenti:0.052
+157	6	4	16	373	357	0	shock:0.086 streamlin:0.050 hyperson:0.048 surfac:0.044 inviscid:0.044 trace:0.043 found:0.041 analog:0.037
+158	3	7	6	168	162	0	thermodynam:0.092 atmospher:0.080 equilibrium:0.080 chemic:0.079 sound:0.075 chart:0.074 composit:0.074 k:0.073
+159	2	8	13	120	107	0	oscil:0.132 pitch:0.119 forc:0.097 0.35:0.090 attack:0.083 undeform:0.083 neg:0.079 appar:0.077
+160	1	9	20	133	113	0	code:0.250 vessel:0.167 head:0.126 asm:0.125 toru:0.125 rigor:0.102 fail:0.095 edit:0.093
+161	3	7	18	142	124	0	gradient:0.143 advers:0.120 uniti:0.108 stabil:0.096 prandtl:0.093 wall:0.092 temperatur:0.088 pressur:0.078
+162	1	9	16	55	39	0	retard:0.242 closer:0.184 absolut:0.160 insul:0.140 pohlhausen:0.136 uniformli:0.135 proport:0.126 uniti:0.122
+163	2	8	13	119	106	0	fine:0.175 rotat:0.103 cylind:0.097 distribut:0.093 law:0.092 chart:0.092 rapid:0.090 revolut:0.086
+164	4	6	8	210	202	0	swept:0.075 wave:0.053 mechan:0.051 speed:0.050 work:0.050 aircraft:0.050 wing:0.048 broaden:0.047
+165	2	8	9	116	107	0	stationari:0.155 advanc:0.153 behind:0.131 weak:0.129 wall:0.127 fluid:0.112 shock:0.107 laminar:0.092
+166	0	10	9	9	0	0	
+167	2	8	14	198	184	0	shield:0.230 re:0.104 glass:0.102 quartz:0.093 protect:0.092 entri:0.081 vehicl:0.081 evapor:0.080
+168	1	9	13	64	51	0	diverg:0.155 pattern:0.147 converg:0.146 plai:0.140 singular:0.131 adiabat:0.127 itself:0.125 princip:0.124
+169	2	8	18	143	125	0	branch:0.147 hodograph:0.110 singular:0.108 sonic:0.100 region:0.096 converg:0.081 symmetr:0.078 give:0.076
+170	4	6	20	172	152	0	standard:0.101 read:0.081 speed:0.075 instrument:0.074 enquiri:0.071 r.a.e:0.067 measur:0.066 ft:0.064
+171	3	7	17	179	162	0	lift:0.074 speed:0.072 perfor:0.069 sting:0.065 m:0.065 effect:0.060 bang:0.059 airborn:0.059
+172	4	6	7	152	145	0	numer:0.094 improv:0.083 meksyn:0.076 integr:0.073 comment:0.072 drawn:0.068 comput:0.068 erfc:0.066
+173	2	8	9	81	72	0	liapunov:0.173 control:0.151 system:0.141 routh:0.100 hurwitz:0.100 second:0.092 proof:0.085 automat:0.075
+174	1	9	9	36	27	0	1.17:0.223 1.81:0.223 sphere:0.221 fore:0.202 wave:0.182 cone:0.174 locat:0.159 knowledg:0.142
+175	0	10	6	6	0	0	
+176	1	9	12	55	43	0	sensibl:0.184 unsteadi:0.183 claim:0.174 semi:0.158 thermal:0.154 solid:0.153 properti:0.146 effort:0.145
+177	4	6	9	204	195	0	perform:0.113 match:0.082 blade:0.077 multistag:0.065 surg:0.061 characterist:0.060 rotat:0.058 advoc:0.052
+178	3	7	9	141	132	0	stage:0.132 characterist:0.101 perform:0.093 match:0.081 stall:0.080 laval:0.069 versu:0.066 develop:0.065
+179	2	8	26	127	101	0	symmetr:0.113 part:0.102 wing:0.097 integr:0.093 triangular:0.091 y:0.086 ux:0.086 anti:0.086
+180	3	7	7	165	158	0	perige:0.150 satellit:0.141 km:0.140 orbit:0.119 h:0.112 air:0.090 densiti:0.088 200:0.088
+181	2	8	6	100	94	0	sonic:0.138 stream:0.102 stagnant:0.100 isoenerget:0.100 bleed:0.090 wake:0.087 extern:0.077 slipstream:0.076
+182	2	8	17	175	158	0	piston:0.109 model:0.107 test:0.083 thick:0.077 had:0.076 7:0.075 stiff:0.072 uncoupl:0.071
+183	3	7	10	151	141	0	intens:0.108 test:0.080 measur:0.079 shock:0.076 surround:0.076 were:0.071 bomber:0.066 30,000:0.066
+184	2	8	6	82	76	0	missil:0.153 ballist:0.132 atmospher:0.131 misalign:0.128 enter:0.124 oscillatori:0.119 miss:0.104 angularli:0.104
+185	6	4	4	271	267	0	width:0.084 buckl:0.075 length:0.073 bai:0.071 suscept:0.064 clamp:0.058 were:0.056 3.0:0.054
+186	3	7	10	126	116	0	second:0.133 order:0.112 bean:0.110 non:0.105 landahl:0.102 combin:0.098 theoret:0.094 mach:0.085
+187	1	9	13	69	56	0	unpressur:0.280 semiempir:0.158 cylind:0.147 unstiffen:0.127 fit:0.117 statist:0.117 curv:0.116 data:0.110
+188	4	6	13	156	143	0	jet:0.126 strain:0.082 mode:0.082 reson:0.076 panel:0.075 aircraft:0.074 engin:0.065 induc:0.065
+189	2	8	12	116	104	0	rheolog:0.119 nickel:0.113 behaviour:0.102 signific:0.088 stress:0.085 alloi:0.079 unreal:0.073 reactor:0.073
+190	3	7	16	158	142	0	galerkin:0.109 static:0.092 simpli:0.082 piston:0.079 plate:0.074 theori:0.071 support:0.070 analys:0.070
+191	7	3	13	288	275	0	buckl:0.073 statu:0.070 stiffen:0.056 unstiffen:0.056 psf:0.047 four:0.047 differenti:0.046 rectangular:0.046
+192	3	7	5	143	138	0	sectori:0.173 clamp:0.172 bend:0.124 plate:0.115 edg:0.080 adopt:0.074 elementari:0.064 superposit:0.064
+193	7	3	6	267	261	0	bend:0.107 uniformli:0.092 sectori:0.074 load:0.071 edg:0.054 paper:0.048 solut:0.041 boundari:0.040
+194	1	9	15	65	50	0	branch:0.176 unstabl:0.169 fig:0.161 ab:0.149 bc:0.149 oc:0.149 stabl:0.148 p:0.142
+195	1	9	16	131	115	0	shell:0.144 explain:0.120 explan:0.115 onc:0.110 drop:0.110 furthermor:0.105 unten:0.103 belief:0.103
+196	3	7	9	140	131	0	structur:0.085 angular:0.082 damp:0.077 gravit:0.076 subject:0.076 viz:0.073 addendum:0.073 omit:0.073
+197	2	8	9	94	85	0	cumul:0.097 gust:0.093 specimen:0.092 element:0.087 15,000:0.082 aircraft:0.079 load:0.078 structur:0.076
+198	2	8	11	138	127	0	donnel:0.138 stress:0.119 bulkhead:0.097 cooler:0.097 clamp:0.091 discontinu:0.091 due:0.084 thermal:0.078
+199	1	9	13	72	59	0	aec:0.163 iter:0.159 univac:0.151 york:0.151 unlimit:0.147 superior:0.144 univers:0.130 prove:0.121
+200	1	9	14	134	120	0	code:0.250 vessel:0.167 head:0.126 asm:0.125 toru:0.125 rigor:0.102 fail:0.095 edit:0.093
+201	4	6	12	304	292	0	dissoci:0.085 reaction:0.085 freez:0.080 hyperson:0.078 inviscid:0.074 coupl:0.064 nose:0.062 bodi:0.061
+202	4	6	12	276	264	0	yaw:0.079 tangent:0.074 bodi:0.066 expans:0.063 flare:0.058 ogiv:0.055 newtonian:0.052 shock:0.051
+203	2	8	9	151	142	0	deviat:0.110 attack:0.110 newtonian:0.093 angl:0.086 normal:0.085 orific:0.082 local:0.075 element:0.074
+204	1	9	7	44	37	0	self:0.193 import:0.177 allow:0.161 simplifi:0.147 induc:0.139 reason:0.138 accur:0.136 factor:0.136
+205	2	8	11	170	159	0	schlicht:0.193 tollmien:0.159 nondissip:0.105 medium:0.094 elast:0.089 wave:0.085 rigid:0.081 mode:0.073
+206	1	9	16	84	68	0	graviti:0.214 center:0.176 1.35:0.156 45degre:0.148 1.0:0.142 locat:0.136 0.8:0.127 chord:0.121
+207	2	8	12	124	112	0	45degre:0.132 plan:0.115 blowdown:0.108 aspect:0.106 graviti:0.104 speed:0.102 transon:0.101 26:0.101
+208	5	5	19	301	282	0	modul:0.123 corridor:0.109 vehicl:0.092 atmospher:0.065 undershoot:0.060 earth:0.057 nonlift:0.057 g:0.053
+209	2	8	10	97	87	0	compress:0.107 corner:0.099 sutherland:0.089 sub:0.082 gradient:0.078 stabil:0.077 lead:0.077 chapman:0.074
+210	2	8	17	88	71	0	axial:0.110 later:0.109 circular:0.108 compress:0.099 load:0.090 band:0.088 under:0.081 criterion:0.078
+211	1	9	10	75	65	0	hydrostat:0.154 outcom:0.146 dimens:0.145 armenaka:0.141 version:0.126 commonli:0.126 writer:0.124 emploi:0.116
+212	6	4	12	155	143	0	load:0.067 bend:0.066 axial:0.065 shell:0.058 temperatur:0.058 cylindr:0.046 hoop:0.045 beam:0.044
+213	6	4	10	182	172	0	thermal:0.109 hoop:0.087 shell:0.085 cylindr:0.074 ring:0.071 stiffen:0.067 compress:0.065 uniform:0.064
+214	1	9	11	77	66	0	warp:0.156 camber:0.146 aforement:0.137 handl:0.123 input:0.121 illustr:0.114 expand:0.107 like:0.107
+215	0	10	13	13	0	0	
+216	0	10	14	14	0	0	
+217	4	6	10	170	160	0	cheng:0.074 layer:0.070 boundari:0.066 number:0.065 yaw:0.063 reynold:0.061 stagnat:0.056 curvatur:0.056
+218	2	8	7	104	97	0	forward:0.188 stagnat:0.161 point:0.134 solut:0.097 transpir:0.090 local:0.087 exact:0.081 squir:0.074
+219	0	10	9	9	0	0	
+220	3	7	17	209	192	0	automat:0.083 solut:0.077 method:0.071 solv:0.067 choleski:0.064 womerslei:0.060 neighbourhood:0.058 goldstein:0.058
+221	4	6	11	273	262	0	method:0.070 layer:0.068 boundari:0.064 wall:0.062 veloc:0.053 transfer:0.050 prandtl:0.049 thwait:0.049
+222	6	4	6	179	173	0	stress:0.101 simpli:0.065 lagrangian:0.060 multipli:0.059 support:0.056 rectangular:0.055 transvers:0.054 design:0.050
+223	3	7	7	142	135	0	clamp:0.121 stress:0.087 tension:0.083 panel:0.079 stiffen:0.078 simpli:0.072 antisymmetr:0.069 support:0.068
+224	1	9	14	104	90	0	freez:0.168 dissoci:0.167 deviat:0.156 nozzl:0.119 begun:0.114 departur:0.100 even:0.098 constant:0.096
+225	3	7	13	245	232	0	center:0.101 minimum:0.083 bodi:0.081 howev:0.067 exert:0.064 have:0.062 zero:0.059 revolut:0.057

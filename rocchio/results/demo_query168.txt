@@ -1,0 +1,100 @@
+Rocchio relevance feedback on Cranfield (1400 documents, 225 judged queries)
+Judged query IDs: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225
+
+Query ID (or q to quit): 168
+
+1. ORIGINAL QUERY 168: what approximate solutions are known to the direct problem of transonic flow in the throat of a nozzle, i.e. finding the flow in a given nozzle .
+
+   INITIAL RESULTS (top 10)
+  1.   doc 750   transonic flow in two dimensional and axially symmetrical n...
+  2.   doc 965   analytic determination of discharge coefficients of flow no...
+  3.   doc 118   the transonic flow of a compressible fluid through an axial...
+  4.   doc 341   the analytical design of an axially symmetric laval nozzle ...
+  5.   doc 217   flow pattern in a converging-diverging nozzle .
+  6.   doc 157   the hodographic transformation in transonic flow .
+  7.   doc 136   recent developments in rocket nozzle configurations .
+  8.   doc 1187  shock-induced boundary layer separation in overexpanded con...
+  9.   doc 591   an approximate equation for the /choke line/ of a compressor .
+ 10.   doc 404   two dimensional transonic flow past airfoils .
+
+2. SELECT DOCUMENTS FOR FEEDBACK (type rank numbers, for example: 1 3 5)
+   Relevant ranks: 5
+   Non-relevant ranks: 1 2 3 4 6 7 8 9 10
+   Relevant documents: [217]
+   Non-relevant documents: [750, 965, 118, 341, 157, 136, 1187, 591, 404]
+
+   alpha [1.0]: 
+   beta [0.75]: 
+   gamma [0.15]: 
+
+3. UPDATED QUERY: alpha=1.00 beta=0.75 gamma=0.15: 13 words before, 64 after
+   Word (stemmed)         Before    After  Change
+   nozzl                  0.4945   0.6731  raised
+   throat                 0.3599   0.4821  raised
+   what                   0.3475   0.3475  same
+   i.                     0.3227   0.3227  same
+   find                   0.3030   0.2995  lowered
+   flow                   0.2120   0.2811  raised
+   transon                0.2624   0.2536  lowered
+   known                  0.2405   0.2382  lowered
+   direct                 0.2204   0.2174  lowered
+   problem                0.1582   0.1551  lowered
+   diverg                 0.0000   0.1551  added
+   pattern                0.0000   0.1474  added
+   Words removed: none
+
+4. NEW RESULTS (top 10; R = in answer key; +n = moved up n places)
+  1. R doc 217     +4 flow pattern in a converging-diverging nozzle .
+  2. - doc 750     -1 transonic flow in two dimensional and axially symmetrical n...
+  3. - doc 118     +0 the transonic flow of a compressible fluid through an axial...
+  4. - doc 965     -2 analytic determination of discharge coefficients of flow no...
+  5. - doc 341     -1 the analytical design of an axially symmetric laval nozzle ...
+  6. - doc 157     +0 the hodographic transformation in transonic flow .
+  7. - doc 221     +5 a theoretical study of annular supersonic nozzles .
+  8. - doc 213     +9 the performance of supersonic turbine nozzles .
+  9. - doc 1187    -1 shock-induced boundary layer separation in overexpanded con...
+ 10. - doc 166    +33 flow of chemically reacting gas mixtures .
+
+   ORIGINAL RESULTS WITH ANSWER KEY
+  1. - doc 750   transonic flow in two dimensional and axially symmetrical n...
+  2. - doc 965   analytic determination of discharge coefficients of flow no...
+  3. - doc 118   the transonic flow of a compressible fluid through an axial...
+  4. - doc 341   the analytical design of an axially symmetric laval nozzle ...
+  5. R doc 217   flow pattern in a converging-diverging nozzle .
+  6. - doc 157   the hodographic transformation in transonic flow .
+  7. - doc 136   recent developments in rocket nozzle configurations .
+  8. - doc 1187  shock-induced boundary layer separation in overexpanded con...
+  9. - doc 591   an approximate equation for the /choke line/ of a compressor .
+ 10. - doc 404   two dimensional transonic flow past airfoils .
+
+5. BEFORE AND AFTER
+
+All documents
+  Metric               Before    After   Change
+  Precision (list)     0.0020   0.0020  +0.0000
+  Recall (list)        1.0000   1.0000  +0.0000
+  F1 (list)            0.0040   0.0040  +0.0000
+  P@3                  0.0000   0.3333  +0.3333
+  P@10                 0.1000   0.1000  +0.0000
+  Recall@10            0.5000   0.5000  +0.0000
+  F1@10                0.1667   0.1667  +0.0000
+  AP                   0.1909   0.5667  +0.3758
+  RR                   0.2000   1.0000  +0.8000
+  nDCG@10              0.2372   0.6131  +0.3759
+
+Unseen documents only (selected documents removed)
+  Metric               Before    After   Change
+  Precision (list)     0.0010   0.0010  +0.0000
+  Recall (list)        1.0000   1.0000  +0.0000
+  F1 (list)            0.0020   0.0020  +0.0000
+  P@3                  0.3333   0.0000  -0.3333
+  P@10                 0.1000   0.1000  +0.0000
+  Recall@10            1.0000   1.0000  +0.0000
+  F1@10                0.1818   0.1818  +0.0000
+  AP                   1.0000   0.1429  -0.8571
+  RR                   1.0000   0.1429  -0.8571
+  nDCG@10              1.0000   0.3333  -0.6667
+
+Try other alpha, beta, gamma on this query? (y/n): n
+
+Query ID (or q to quit): q

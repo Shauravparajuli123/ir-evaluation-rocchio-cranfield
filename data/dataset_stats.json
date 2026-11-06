@@ -1,0 +1,33 @@
+{
+ "docs": 1400,
+ "unique_doc_ids": 1400,
+ "empty_text_docs": [
+  "471",
+  "995"
+ ],
+ "queries": 225,
+ "raw_max_query_num": 365,
+ "mean_query_words": 17.973333333333333,
+ "qrel_rows": 1837,
+ "qrel_query_ids": 225,
+ "qrel_max_query_id": 225,
+ "qrel_label_counts": {
+  "1": 1611,
+  "0": 225,
+  "3": 1
+ },
+ "qrel_docs_missing": 0,
+ "queries_with_relevant": 225,
+ "positive_rows": 1612,
+ "relevant_per_query_mean": 7.164444444444444,
+ "relevant_per_query_min": 1,
+ "relevant_per_query_max": 39,
+ "first_raw_ids": [
+  1,
+  2,
+  4,
+  8,
+  9,
+  10
+ ]
+}
